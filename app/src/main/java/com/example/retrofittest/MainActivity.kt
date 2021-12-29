@@ -2,7 +2,7 @@ package com.example.retrofittest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import com.example.retrofittest.Data.SmartPlayListParam
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +19,10 @@ class MainActivity : AppCompatActivity() {
 //                Log.d("MainActivity", "Error registering new user")
 //            }
         }
+
+        var param = SmartPlayListParam("1", "10", "1")
+        apiService.getSmartPlayList(param)
+        apiService.getMoodCategoryList("moods")
     }
 
 

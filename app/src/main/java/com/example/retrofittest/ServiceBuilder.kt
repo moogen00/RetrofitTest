@@ -1,6 +1,5 @@
 package com.example.retrofittest
 
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -9,6 +8,7 @@ object ServiceBuilder {
 
     // http://221.148.44.58:8088/api/v1/dev/themes
     // http://10.28.3.78:8088/api/v1/dev/themes
+    // http://10.28.3.78:8088/api/v1/dev/descriptors?desc_type=moods
     private val retrofit = Retrofit.Builder()
         .baseUrl("http://10.28.3.78:8088") // change this IP for testing by your actual machine IP
         .addConverterFactory(GsonConverterFactory.create())
