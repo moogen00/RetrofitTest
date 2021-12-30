@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         var param = SmartPlayListParam("1", "10", "1")
         apiService.getSmartPlayList(param)
         apiService.getMoodCategoryList("moods")
+        apiService.getSmartPlayListForMood("moods", "34154", "10", "1")
     }
 
 

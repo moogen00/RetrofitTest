@@ -1,4 +1,5 @@
 package com.example.retrofittest
+
 import android.util.Log
 import com.example.retrofittest.Data.MoodCategory
 import com.example.retrofittest.Data.ThemeResult
@@ -9,7 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RestApiService {
-    fun getData(onResult: (ThemeResult) -> Unit){
+    fun getData(onResult: (ThemeResult) -> Unit) {
         val retrofit = ServiceBuilder.buildService(RestApi::class.java)
         retrofit.getTheme().enqueue(
             object : Callback<ThemeResult> {
@@ -18,6 +19,7 @@ class RestApiService {
                     Log.d("RestAPiService", "=============== failure")
                     Log.d("RestAPiService", "Response = $t")
                 }
+
                 override fun onResponse(call: Call<ThemeResult>, response: Response<ThemeResult>) {
                     Log.d("RestAPiService", "=============== response")
                     val res = response.body()?.result
@@ -32,8 +34,7 @@ class RestApiService {
     }
 
 
-
-    fun getAA(){
+    fun getAA() {
         val retrofit = ServiceBuilder.buildService(RestApi::class.java)
         retrofit.getTheme().enqueue(
             object : Callback<ThemeResult> {
@@ -42,6 +43,7 @@ class RestApiService {
                     Log.d("RestAPiService", "=============== failure")
                     Log.d("RestAPiService", "Response = $t")
                 }
+
                 override fun onResponse(call: Call<ThemeResult>, response: Response<ThemeResult>) {
                     Log.d("RestAPiService", "=============== response")
                     val res = response.body()?.result
@@ -55,7 +57,7 @@ class RestApiService {
         )
     }
 
-    fun getSmartPlayList(param: SmartPlayListParam){
+    fun getSmartPlayList(param: SmartPlayListParam) {
         val retrofit = ServiceBuilder.buildService(RestApi::class.java)
         retrofit.getSmartPlayList(param).enqueue(
             object : Callback<SmartPlayList> {
@@ -64,7 +66,11 @@ class RestApiService {
                     Log.d("RestAPiService", "=============== getSmartPlayList failure")
                     Log.d("RestAPiService", "Response = $t")
                 }
-                override fun onResponse(call: Call<SmartPlayList>, response: Response<SmartPlayList>) {
+
+                override fun onResponse(
+                    call: Call<SmartPlayList>,
+                    response: Response<SmartPlayList>
+                ) {
                     Log.d("RestAPiService", "=============== getSmartPlayList response")
                     val theme_id = response.body()?.themeId
                     val theme_name = response.body()?.themeName
@@ -78,13 +84,13 @@ class RestApiService {
                             Log.d("RestAPiService", "theme.plThemeId = ${theme.plThemeId}")
                             Log.d("RestAPiService", "theme.plThemeName = ${theme.plThemeName}")
 
-                            for(item in theme.descriptor) {
+                            for (item in theme.descriptor) {
                                 Log.d("RestAPiService", "item = ${item}")
                             }
-                            for(item in theme.playList1) {
+                            for (item in theme.playList1) {
                                 Log.d("RestAPiService", "itemPlayList1 = ${item}")
                             }
-                            for(item in theme.playList2) {
+                            for (item in theme.playList2) {
                                 Log.d("RestAPiService", "itemPlayList2 = ${item}")
                             }
 
@@ -95,7 +101,7 @@ class RestApiService {
         )
     }
 
-    fun getMoodCategoryList(mood: String){
+    fun getMoodCategoryList(mood: String) {
         val retrofit = ServiceBuilder.buildService(RestApi::class.java)
         retrofit.getMoodCategoryList(mood).enqueue(
             object : Callback<MoodCategory> {
@@ -104,7 +110,11 @@ class RestApiService {
                     Log.d("RestAPiService", "=============== getMoodCategoryList failure")
                     Log.d("RestAPiService", "Response = $t")
                 }
-                override fun onResponse(call: Call<MoodCategory>, response: Response<MoodCategory>) {
+
+                override fun onResponse(
+                    call: Call<MoodCategory>,
+                    response: Response<MoodCategory>
+                ) {
                     Log.d("RestAPiService", "=============== getMoodCategoryList response")
                     val mood_list = response.body()?.moodList
 
@@ -119,6 +129,29 @@ class RestApiService {
         )
     }
 
+    fun getSmartPlayListForMood(desc_type: String, id: String, limit: String, offset: String) {
+        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
+        retrofit.getSmartPlayListForMood(desc_type, id, limit, offset)
+            .enqueue(
+                object : Callback<String> {
+                    override fun onFailure(call: Call<String>, t: Throwable) {
+                        // onResult(null)
+                        Log.d("RestAPiService", "=============== getSmartPlayListForMood failure")
+                        Log.d("RestAPiService", "Response = $t")
+                    }
+
+                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                        Log.d("RestAPiService", "=============== getSmartPlayListForMood response")
+                        Log.i("RestAPiService", response.body().toString())
+//                        val resp = response.body()
+//
+//                        if (resp != null) {
+//                            Log.d("RestAPiService", "resp = $resp")
+//                        }
+                    }
+                }
+            )
+    }
 
 
 }
